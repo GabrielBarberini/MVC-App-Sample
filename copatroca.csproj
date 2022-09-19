@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk.Web" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <PublishReadyToRun>true</PublishReadyToRun>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>CopaTroca</AssemblyName>
+        <OutputPath>bin</OutputPath>
+    </PropertyGroup>
+
+    <Target Name="Build">  
+        <MakeDir Directories="$(OutputPath)" Condition="!Exists('$(OutputPath)')" />
+        <Csc Sources="@(Compile)" OutputAssembly="$(OutputPath)$(AssemblyName).exe" />
+    </Target>
+
+    <Target Name="Clean" >
+        <Delete Files="$(OutputPath)$(AssemblyName).exe" />
+    </Target>
+
+    <Target Name="Rebuild" DependsOnTargets="Clean;Build" />
+
+</Project>
+
