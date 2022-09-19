@@ -4,7 +4,9 @@ using System.Text;
 using copatroca.Interfaces;
  
 namespace copatroca.Models { 
-    internal class User : IUser {  
+    internal class User{  
+
+        public int Id { get; set; }
         public string Name { get; set; } = string.Empty;
 
         public string Password { get; set; } = string.Empty;
@@ -17,5 +19,10 @@ namespace copatroca.Models {
 
         void Create(User newUser) {
         } 
+
+        public User()
+        {
+            this.Id = -1;
+        }
     }
 } 

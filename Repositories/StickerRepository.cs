@@ -2,8 +2,7 @@ using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
 using copatroca.Models;
-using Sql.Data.SqlClient;
-using Sql.Data;
+using System.Data.SqlClient;
 
 namespace copatroca.Repositories { 
 
