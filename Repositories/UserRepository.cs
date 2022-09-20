@@ -45,6 +45,40 @@ namespace copatroca.Repositories {
                     cmd.ExecuteNonQuery();
                 }
             }
+
+
+        }
+
+        public User Read(string userEmail)
+        {
+            User user = new User();
+
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelect = $"SELECT * FROM CopaUsers WHERE Email = @Email";
+                con.Open();
+                SqlDataReader rdr;
+
+                using (SqlCommand cmd = new SqlCommand(querySelect, con))
+                {
+                    cmd.Parameters.AddWithValue("@Email", userEmail);
+                    rdr = cmd.ExecuteReader();
+
+                    if (rdr.HasRows)
+                        rdr.Read();
+
+                    else
+                        return user;
+
+                    user.Id = Convert.ToInt32(rdr[0]);
+                    user.Name = rdr[1].ToString();
+                    user.Email = rdr[2].ToString();
+                    user.Password = rdr[3].ToString();
+
+                }
+
+            }
+            return user;
         }
     }
-} 
+}
