@@ -4,10 +4,11 @@ using System.Text;
  
 namespace copatroca.Models { 
     internal class Contact { 
-        public int UserId { get; set; }
+        public int User_Id { get; set; }
         public string Info { get; set; }
-        public Contact(User user) {
-            this.UserId = user.Id;
+        public Contact(User user, string Info) {
+            this.User_Id = user.Id;
+            this.Info = Info;
         }
     }
 } 

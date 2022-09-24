@@ -14,10 +14,6 @@ namespace copatroca.Models {
 
         public string Email { get; set; } = string.Empty;
 
-        public Sticker UserSticker { get; set; }
-
-        public Contact UserContact { get; set; }
-
         public User()
         {
             this.Id = -1;

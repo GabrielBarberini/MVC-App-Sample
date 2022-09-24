@@ -36,11 +36,11 @@ namespace copatroca.Repositories {
         public void Delete(string idProduct) { 
             throw new NotImplementedException();
         } 
-        */
+        
 
         public Contact Read(User user)
         {
-            Contact contact = new Contact(user);
+            Contact contact = new Contact(user, "");
 
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
