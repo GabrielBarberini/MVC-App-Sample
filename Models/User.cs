@@ -18,9 +18,6 @@ namespace copatroca.Models {
 
         public Contact UserContact { get; set; }
 
-        void Create(User newUser) {
-        } 
-
         public User()
         {
             this.Id = -1;

@@ -27,13 +27,43 @@ namespace copatroca.Repositories {
 
                     con.Open();
                     cmd.ExecuteNonQuery();
-                }
-            }
-        }
-        void Update(Contact updateContact);
-        //void Delete(User user);
-        Contact Read(string userEmail);
+                    con.Close();
+                } 
+            } 
+        } 
 
-        
-    }
-} 
+        public void Delete(string idProduct) { 
+            throw new NotImplementedException();
+        } 
+        */
+
+        public Contact Read(User user)
+        {
+            Contact contact = new Contact(user);
+
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelect = $"SELECT * FROM Contacts WHERE User_Id = @UserId";
+                con.Open();
+                SqlDataReader rdr;
+
+                using (SqlCommand cmd = new SqlCommand(querySelect, con))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", user.Id);
+                    rdr = cmd.ExecuteReader();
+
+                    if (rdr.HasRows)
+                        rdr.Read();
+
+                    else
+                        return contact;
+
+                    contact.Info = rdr[1].ToString();
+                    
+
+                }
+
+            }
+            return contact;
+        }
+       
