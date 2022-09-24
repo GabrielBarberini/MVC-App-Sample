@@ -26,6 +26,7 @@ namespace copatroca.Repositories {
                     cmd.Parameters.AddWithValue("@User_Id", newContact.User_Id);
 
                     con.Open();
+                    cmd.Prepare();
                     cmd.ExecuteNonQuery();
                     con.Close();
                 } 
@@ -66,4 +67,24 @@ namespace copatroca.Repositories {
             }
             return contact;
         }
-       
+
+        public void Update(Contact updateContact)
+        {
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string queryInsert = $"UPDATE Contacts SET Info = @Info WHERE User_Id = @UserId";
+
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con))
+                {
+                    cmd.Parameters.AddWithValue("@Info", updateContact.Info);
+                    cmd.Parameters.AddWithValue("@UserId", updateContact.UserId);
+
+                    con.Open();
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+        }
+
+    }
+}
