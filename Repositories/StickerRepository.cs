@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using copatroca.Interfaces;
 using copatroca.Models;
 using System.Data.SqlClient;
+using copatroca.Interfaces;
 
 namespace copatroca.Repositories { 
 
-    internal class StickerRepository {
+    internal class StickerRepository:IStickerRepository {
         //private readonly string stringConexao = "server=127.0.0.1;uid=root;pwd=maker;database=Catalog";        
 
         /*public void Create(Product newProduct) { 
