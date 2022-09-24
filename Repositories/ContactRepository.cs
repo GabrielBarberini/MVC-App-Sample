@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 namespace copatroca.Repositories { 
 
     internal class ContactRepository {
-        //private readonly string stringConexao = "server=127.0.0.1;uid=root;pwd=maker;database=Catalog";        
+        private readonly string stringConexao = "server=labsoft.pcs.usp.br,1433;database=db_4;User=usuario_4;pwd=39431322853";    
 
         /*public void Create(Product newProduct) { 
             using (SqlConnection con = new SqlConnection(stringConexao)) {
@@ -31,36 +31,38 @@ namespace copatroca.Repositories {
         public void Delete(string idProduct) { 
             throw new NotImplementedException();
         } 
+        */
 
-        public List<Product> ReadAll() {
-            List<Product> listProducts = new List<Product>();
+        public Contact Read(User user)
+        {
+            Contact contact = new Contact(user);
 
-            using (SqlConnection con = new SqlConnection(stringConexao)) {
-                String querySelect = "SELECT * FROM Products;"; 
+            using (SqlConnection con = new SqlConnection(stringConexao))
+            {
+                string querySelect = $"SELECT * FROM Contacts WHERE User_Id = @UserId";
                 con.Open();
                 SqlDataReader rdr;
 
-                using (SqlCommand cmd = new SqlCommand(querySelect, con)) {
+                using (SqlCommand cmd = new SqlCommand(querySelect, con))
+                {
+                    cmd.Parameters.AddWithValue("@UserId", user.Id);
                     rdr = cmd.ExecuteReader();
 
-                    while (rdr.Read()) {
-                        Product product = new Product() {
-                            IdProduct = rdr["IdProduct"].ToString(),
-                            Name = rdr[1].ToString(),
-                            Description = rdr[2].ToString(),
-                            Price = Convert.ToDecimal(rdr[3])
-                        }; 
+                    if (rdr.HasRows)
+                        rdr.Read();
 
-                        listProducts.Add(product);
-                    } 
-                } 
+                    else
+                        return contact;
 
-                con.Close();
-            } 
-            
-            return listProducts;
-        }  
+                    contact.Info = rdr[1].ToString();
+                    
 
+                }
+
+            }
+            return contact;
+        }
+        /*
         public void Update(Product product) {
             throw new NotImplementedException();
         } 
