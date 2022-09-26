@@ -18,5 +18,10 @@ namespace copatroca.Models {
         {
             this.Id = -1;
         }
+
+        public void ToString()
+        {
+            Console.WriteLine($"Id = {Id}\nNome = {Name}\nEmail = {Email}");
+        }
     }
 } 
