@@ -9,7 +9,7 @@ namespace copatroca.Repositories {
     internal class UserRepository : IUserRepository {
         private readonly string stringConexao = "server=labsoft.pcs.usp.br,1433;database=db_4;User=usuario_4;pwd=39431322853";
 
-        public void Create(User newUser) {
+        public void CreateUser(User newUser) {
             using(SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"INSERT INTO CopaUsers VALUES (@Nome, @Email, @Password);";
 
@@ -24,15 +24,15 @@ namespace copatroca.Repositories {
             }
         }
 
-        public void Update(User updateUser) {
+        public void UpdateUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"UPDATE CopaUsers SET Nome = @Nome, Email = @Email, Password = @Password WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con)) {
-                    cmd.Parameters.AddWithValue("@Nome", updateUser.Name);
-                    cmd.Parameters.AddWithValue("@Email", updateUser.Email);
-                    cmd.Parameters.AddWithValue("@Password", updateUser.Password);
-                    cmd.Parameters.AddWithValue("@Id", updateUser.Id);
+                    cmd.Parameters.AddWithValue("@Nome", user.Name);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@Id", user.Id);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -40,7 +40,7 @@ namespace copatroca.Repositories {
             }
         }
 
-        public User Read(string userEmail) {
+        public User ReadUser(string userEmail) {
             User user = new User();
 
             using (SqlConnection con = new SqlConnection(stringConexao)) {
@@ -66,7 +66,7 @@ namespace copatroca.Repositories {
             return user;
         }
 
-        public void Delete(User user) {
+        public void DeleteUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"DELETE FROM CopaUsers WHERE id = @Id;";
 

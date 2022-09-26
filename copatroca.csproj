@@ -3,7 +3,6 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <PublishReadyToRun>true</PublishReadyToRun>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>CopaTroca</AssemblyName>
         <OutputPath>bin</OutputPath>

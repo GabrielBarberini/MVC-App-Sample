@@ -37,3 +37,7 @@ To run this program, download the source code to simulate collecting stickers.
 ## Contribution
 
 Your contributions and suggestions are heartily welcome.
+
+
+## Trello Board
+- https://trello.com/b/IHrJVixr/cteds-copa
