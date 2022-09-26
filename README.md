@@ -1,4 +1,4 @@
-<img src="SOURCE/icon_copatroca.png" width="150">
+<img src="source/icon_copatroca.png" width="150">
 
 <h1>Copa Troca</h1>
 <img src="https://img.shields.io/badge/version-0.0.1-blue.svg">
@@ -25,11 +25,11 @@ To run this program, download the source code to simulate collecting stickers.
 
 ### Screen 1 - MENU
 
-<img src="SOURCE/screen1.png" width="150">
+<img src="source/screen1.png" width="150">
 
 ### Screen 1 - ALBUM MENU
 
-<img src="SOURCE/screen2.png" width="150">
+<img src="source/screen2.png" width="150">
 
 
 ---
