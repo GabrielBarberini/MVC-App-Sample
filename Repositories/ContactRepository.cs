@@ -14,16 +14,16 @@ namespace copatroca.Repositories {
         /// </summary>
         /// <param name="newContact">String livre para o usuário inserir as informações de contato</param>
         /// <param name="newContactUser">Contato que terá o contato adicionado</param>
-        public void Create(Contact newContact)
+        public void Create(User user)
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = "INSERT INTO Contacts ([Info], [User_Id]) VALUES (@Info, @User_Id);";
+                string queryInsert = "INSERT INTO Contacts ([Info], [userId]) VALUES (@Info, @userId);";
 
                 using(SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@Info", newContact.Info);
-                    cmd.Parameters.AddWithValue("@User_Id", newContact.User_Id);
+                    cmd.Parameters.AddWithValue("@Info", user.contact.Info);
+                    cmd.Parameters.AddWithValue("@userId", user.Id);
 
                     con.Open();
                     cmd.ExecuteNonQuery();
@@ -36,18 +36,13 @@ namespace copatroca.Repositories {
         } 
         
 
-        public Contact Read(User user)
-        {
-            Contact contact = new Contact(user, "");
-
-            using (SqlConnection con = new SqlConnection(stringConexao))
-            {
-                string querySelect = $"SELECT * FROM Contacts WHERE User_Id = @UserId";
+        public Contact Read(User user) {
+            using (SqlConnection con = new SqlConnection(stringConexao)) {
+                string querySelect = $"SELECT * FROM Contacts WHERE userId = @UserId";
                 con.Open();
                 SqlDataReader rdr;
 
-                using (SqlCommand cmd = new SqlCommand(querySelect, con))
-                {
+                using (SqlCommand cmd = new SqlCommand(querySelect, con)) {
                     cmd.Parameters.AddWithValue("@UserId", user.Id);
                     rdr = cmd.ExecuteReader();
 
@@ -55,27 +50,24 @@ namespace copatroca.Repositories {
                         rdr.Read();
 
                     else
-                        return contact;
+                        return user.contact;
 
-                    contact.Info = rdr[1].ToString();
-                    
-
+                    user.contact.Info = rdr[1].ToString();
                 }
-
             }
-            return contact;
+            return user.contact;
         }
 
-        public void Update(Contact updateContact)
+        public void Update(User user)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = $"UPDATE Contacts SET Info = @Info WHERE User_Id = @UserId";
+                string queryInsert = $"UPDATE Contacts SET Info = @Info WHERE userId = @UserId";
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@Info", updateContact.Info);
-                    cmd.Parameters.AddWithValue("@UserId", updateContact.User_Id);
+                    cmd.Parameters.AddWithValue("@Info", user.contact.Info);
+                    cmd.Parameters.AddWithValue("@UserId", user.Id);
 
                     con.Open();
                     cmd.ExecuteNonQuery();

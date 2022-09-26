@@ -24,15 +24,15 @@ namespace copatroca.Repositories {
             }
         }
 
-        public void Update(User updateUser) {
+        public void Update(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"UPDATE CopaUsers SET Nome = @Nome, Email = @Email, Password = @Password WHERE Id = @Id";
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con)) {
-                    cmd.Parameters.AddWithValue("@Nome", updateUser.Name);
-                    cmd.Parameters.AddWithValue("@Email", updateUser.Email);
-                    cmd.Parameters.AddWithValue("@Password", updateUser.Password);
-                    cmd.Parameters.AddWithValue("@Id", updateUser.Id);
+                    cmd.Parameters.AddWithValue("@Nome", user.Name);
+                    cmd.Parameters.AddWithValue("@Email", user.Email);
+                    cmd.Parameters.AddWithValue("@Password", user.Password);
+                    cmd.Parameters.AddWithValue("@Id", user.Id);
 
                     con.Open();
                     cmd.ExecuteNonQuery();

@@ -1,2 +1,4 @@
 # CTEDS Copa
-tbw
+
+# Trello Board
+- https://trello.com/b/IHrJVixr/cteds-copa
