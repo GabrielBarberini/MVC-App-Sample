@@ -11,27 +11,30 @@ namespace copatroca {
                 StickerCode = "A2 B3 C0 D1"
             };
 
-            Contact contact = new Contact() {
-                Info = "4002-8922"
-            };
 
             User user = new User() { 
                 Name = "Marcos",
                 Password = "marcos123",
                 Email = "marcos@galdino.joao",
-                UserSticker = sticker,
-                UserContact = contact
-            }; 
+            };
+
+            Contact contact = new Contact(user, "4002-8922");
+
+            ContactRepository _contact = new();
+            _contact.Create(contact);
 
             string option;
             do {
                 option = Console.ReadLine();
                 switch (option) {
                     case "0":
+                        Console.WriteLine(0);
                         break;
-                    case "1";
+                    case "1":
+                        Console.WriteLine(1);
                         break;
-                    case "2";
+                    case "2":
+                        Console.WriteLine(2);
                         break;
                     default:
                         break;
