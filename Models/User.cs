@@ -10,21 +10,21 @@ namespace copatroca.Models {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        Contact contact { get; set; }
+        public Contact contact { get; set; }
 
         public User() {
-            this.contact = new Contact(this, "No info");
-            this.Id = null;
+            this.contact = new Contact("No info");
         }
 
         public void ToString() {
             Console.WriteLine($"Id = {Id}\nNome = {Name}\nEmail = {Email}");
         }
 
-        private class Contact {
+        public class Contact {
             public string Info { get; set; }
+            public int uid { get; set; }
 
-            public Contact(User user, string Info) {
+            public Contact(string Info) {
                 this.Info = Info;
             }
         }

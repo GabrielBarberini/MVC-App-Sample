@@ -1,5 +1,3 @@
-/*
-
 using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
@@ -16,7 +14,7 @@ namespace copatroca.Repositories {
         /// </summary>
         /// <param name="newContact">String livre para o usuário inserir as informações de contato</param>
         /// <param name="newContactUser">Contato que terá o contato adicionado</param>
-        public void CreateContact(User user)
+        public void CreateContact(User user, string info)
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
@@ -24,7 +22,7 @@ namespace copatroca.Repositories {
 
                 using(SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@Info", user.contact.Info);
+                    cmd.Parameters.AddWithValue("@Info", info);
                     cmd.Parameters.AddWithValue("@userId", user.Id);
 
                     con.Open();
@@ -38,7 +36,7 @@ namespace copatroca.Repositories {
         } 
         
 
-        public Contact ReadContact(User user) {
+        public User.Contact ReadContact(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string querySelect = $"SELECT * FROM Contacts WHERE userId = @UserId";
                 con.Open();
@@ -80,4 +78,3 @@ namespace copatroca.Repositories {
 
     }
 }
-*/

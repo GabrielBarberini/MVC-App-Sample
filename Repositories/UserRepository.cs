@@ -1,4 +1,3 @@
-/*
 using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
@@ -86,4 +85,3 @@ namespace copatroca.Repositories {
         }
     }
 }
-*/

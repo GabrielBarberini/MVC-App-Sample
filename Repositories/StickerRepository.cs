@@ -1,4 +1,3 @@
-/*
 using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
@@ -7,11 +6,11 @@ using System.Data.SqlClient;
 using copatroca.Interfaces;
 
 namespace copatroca.Repositories { 
-
     internal class StickerRepository:IStickerRepository {
         //private readonly string stringConexao = "server=127.0.0.1;uid=root;pwd=maker;database=Catalog";        
 
-        /*public void Create(Product newProduct) { 
+/*
+        public void Create(Product newProduct) { 
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"INSERT INTO Products (IdProduct, Name, Description, Price) VALUES (@IdProduct, @Name, @Description, @Price);";
 
@@ -96,6 +95,6 @@ namespace copatroca.Repositories {
                 con.Close();
             }
         } 
+    */
     } 
 } 
-*/
