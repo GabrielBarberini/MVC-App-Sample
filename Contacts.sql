@@ -1,3 +1,4 @@
+--Selecionando a database--
 USE db_4
 GO
 

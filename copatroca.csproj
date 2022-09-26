@@ -3,9 +3,9 @@
         <OutputType>Exe</OutputType>
         <TargetFramework>net6.0</TargetFramework>
         <PublishReadyToRun>true</PublishReadyToRun>
-        <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <AssemblyName>CopaTroca</AssemblyName>
+        <ImplicitUsings>enable</ImplicitUsings>
         <OutputPath>bin</OutputPath>
     </PropertyGroup>
 

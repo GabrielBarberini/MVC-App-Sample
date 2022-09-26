@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using copatroca.Models;
 using copatroca.Repositories;
- 
+
 namespace copatroca { 
     internal class Program {  
         static void Main(string[] args) {
@@ -32,9 +32,6 @@ namespace copatroca {
                             Password = password,
                         };
 
-                        //Contact contact = new(user, Info);
-
-                        //_contact.Create(contact);
                         _user.Create(user);
 
                         Console.WriteLine("Usuario adicionado");
@@ -61,7 +58,6 @@ namespace copatroca {
                         break;
                 } 
             } while (option != "0"); 
-
         } 
     } 
 } 

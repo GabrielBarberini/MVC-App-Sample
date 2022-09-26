@@ -1,3 +1,4 @@
+/*
 using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
@@ -9,7 +10,7 @@ namespace copatroca.Repositories {
     internal class UserRepository : IUserRepository {
         private readonly string stringConexao = "server=labsoft.pcs.usp.br,1433;database=db_4;User=usuario_4;pwd=39431322853";
 
-        public void Create(User newUser) {
+        public void CreateUser(User newUser) {
             using(SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"INSERT INTO CopaUsers VALUES (@Nome, @Email, @Password);";
 
@@ -24,7 +25,7 @@ namespace copatroca.Repositories {
             }
         }
 
-        public void Update(User user) {
+        public void UpdateUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"UPDATE CopaUsers SET Nome = @Nome, Email = @Email, Password = @Password WHERE Id = @Id";
 
@@ -40,7 +41,7 @@ namespace copatroca.Repositories {
             }
         }
 
-        public User Read(string userEmail) {
+        public User ReadUser(string userEmail) {
             User user = new User();
 
             using (SqlConnection con = new SqlConnection(stringConexao)) {
@@ -66,7 +67,7 @@ namespace copatroca.Repositories {
             return user;
         }
 
-        public void Delete(User user) {
+        public void DeleteUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"DELETE FROM CopaUsers WHERE id = @Id;";
 
@@ -85,3 +86,4 @@ namespace copatroca.Repositories {
         }
     }
 }
+*/

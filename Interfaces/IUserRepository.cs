@@ -5,9 +5,9 @@ using copatroca.Models;
 
 namespace copatroca.Interfaces {
     internal interface IUserRepository {
-        void Create(User newUser);
-        void Update(User updateUser);
+        void CreateUser(User newUser);
+        void UpdateUser(User updateUser);
         //void Delete(User user);
-        User Read(string userEmail);
+        User ReadUser(string userEmail);
     } 
 } 

@@ -1,3 +1,5 @@
+/*
+
 using System;
 using System.Collections.Generic;
 using copatroca.Interfaces;
@@ -14,7 +16,7 @@ namespace copatroca.Repositories {
         /// </summary>
         /// <param name="newContact">String livre para o usuário inserir as informações de contato</param>
         /// <param name="newContactUser">Contato que terá o contato adicionado</param>
-        public void Create(User user)
+        public void CreateContact(User user)
         {
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
@@ -31,12 +33,12 @@ namespace copatroca.Repositories {
             } 
         } 
 
-        public void Delete(string idProduct) { 
+        public void DeleteContact(string idProduct) { 
             throw new NotImplementedException();
         } 
         
 
-        public Contact Read(User user) {
+        public Contact ReadContact(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string querySelect = $"SELECT * FROM Contacts WHERE userId = @UserId";
                 con.Open();
@@ -58,7 +60,7 @@ namespace copatroca.Repositories {
             return user.contact;
         }
 
-        public void Update(User user)
+        public void UpdateContact(User user)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
@@ -78,3 +80,4 @@ namespace copatroca.Repositories {
 
     }
 }
+*/
