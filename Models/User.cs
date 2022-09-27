@@ -10,10 +10,19 @@ namespace copatroca.Models {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public Contact contact { get; set; }
+        public Contact UserContact { get; set; }
+        
+        public User() { } 
 
-        public User() {
-            this.contact = new Contact("No info");
+        public User(string info) {
+            this.UserContact = new Contact(info);
+        }
+
+        public User(int Id, string Name, string Email, string Password) {
+            this.Id = Id;
+            this.Name = Name;
+            this.Email = Email;
+            this.Password = Password;
         }
 
         public void ToString() {
