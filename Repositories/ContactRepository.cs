@@ -14,11 +14,14 @@ namespace copatroca.Repositories {
         /// </summary>
         /// <param name="newContact">String livre para o usuário inserir as informações de contato</param>
         /// <param name="newContactUser">Contato que terá o contato adicionado</param>
-        public void CreateContact(User user, string info)
+        public void CreateContact(string email, string info)
         {
+            UserRepository _userDB = new UserRepository();
+            User user = _userDB.ReadUser(email);
+
             using(SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = "INSERT INTO Contacts ([Info], [userId]) VALUES (@Info, @userId);";
+                string queryInsert = "INSERT INTO Contacts ([Info], [User_Id]) VALUES (@Info, @userId);";
 
                 using(SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
@@ -31,14 +34,29 @@ namespace copatroca.Repositories {
             } 
         } 
 
-        public void DeleteContact(string idProduct) { 
-            throw new NotImplementedException();
+        public void DeleteContact(User user) { 
+            using (SqlConnection con = new SqlConnection(stringConexao)) {
+                string queryInsert = $"DELETE FROM Contacts WHERE User_Id = @UserId;";
+
+                using (SqlCommand cmd = new SqlCommand(queryInsert, con)) {
+                    cmd.Parameters.AddWithValue("@UserId", user.Id);
+
+                    con.Open();
+                    try {
+                        cmd.ExecuteNonQuery();
+                    } catch (Exception ex) {
+                        Console.WriteLine(ex.GetType().Name);
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+            }
         } 
         
+        public string ReadContact(User user) {
+            string info = "";
 
-        public User.Contact ReadContact(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
-                string querySelect = $"SELECT * FROM Contacts WHERE userId = @UserId";
+                string querySelect = $"SELECT * FROM Contacts WHERE User_Id = @UserId";
                 con.Open();
                 SqlDataReader rdr;
 
@@ -50,23 +68,23 @@ namespace copatroca.Repositories {
                         rdr.Read();
 
                     else
-                        return user.contact;
+                        return info;
 
-                    user.contact.Info = rdr[1].ToString();
+                     info = rdr[1].ToString();
                 }
             }
-            return user.contact;
+            return info;
         }
 
-        public void UpdateContact(User user)
+        public void UpdateContact(User user, string info)
         {
             using (SqlConnection con = new SqlConnection(stringConexao))
             {
-                string queryInsert = $"UPDATE Contacts SET Info = @Info WHERE userId = @UserId";
+                string queryInsert = $"UPDATE Contacts SET Info = @Info WHERE User_Id = @UserId";
 
                 using (SqlCommand cmd = new SqlCommand(queryInsert, con))
                 {
-                    cmd.Parameters.AddWithValue("@Info", user.contact.Info);
+                    cmd.Parameters.AddWithValue("@Info", info);
                     cmd.Parameters.AddWithValue("@UserId", user.Id);
 
                     con.Open();

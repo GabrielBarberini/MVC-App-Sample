@@ -9,7 +9,7 @@ namespace copatroca.Repositories {
     internal class UserRepository : IUserRepository {
         private readonly string stringConexao = "server=labsoft.pcs.usp.br,1433;database=db_4;User=usuario_4;pwd=39431322853";
 
-        public void CreateUser(User newUser) {
+         public void CreateUser(User newUser) {
             using(SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"INSERT INTO CopaUsers VALUES (@Nome, @Email, @Password);";
 
@@ -21,10 +21,13 @@ namespace copatroca.Repositories {
                     con.Open();
                     cmd.ExecuteNonQuery();
                 }
+
+                ContactRepository _contactDB = new ContactRepository();
+                _contactDB.CreateContact(newUser.Email, newUser.UserContact.Info);
             }
         }
 
-        public void UpdateUser(User user) {
+         public void UpdateUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"UPDATE CopaUsers SET Nome = @Nome, Email = @Email, Password = @Password WHERE Id = @Id";
 
@@ -40,9 +43,7 @@ namespace copatroca.Repositories {
             }
         }
 
-        public User ReadUser(string userEmail) {
-            User user = new User();
-
+         public User ReadUser(string userEmail) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string querySelect = $"SELECT * FROM CopaUsers WHERE Email = @Email";
                 con.Open();
@@ -55,18 +56,22 @@ namespace copatroca.Repositories {
                     if (rdr.HasRows)
                         rdr.Read();
                     else
-                        return user;
+                        Console.WriteLine("\nUsuário não encontrado!");
 
-                    user.Id = Convert.ToInt32(rdr[0]);
-                    user.Name = rdr[1].ToString();
-                    user.Email = rdr[2].ToString();
-                    user.Password = rdr[3].ToString();
+                    User user = new User()
+                    {
+                        Id = Convert.ToInt32(rdr[0]),
+                        Name = rdr[1].ToString(),
+                        Email = rdr[2].ToString(),
+                        Password = rdr[3].ToString()
+                    };
+
+                    return user;
                 }
             }
-            return user;
         }
 
-        public void DeleteUser(User user) {
+         public void DeleteUser(User user) {
             using (SqlConnection con = new SqlConnection(stringConexao)) {
                 string queryInsert = $"DELETE FROM CopaUsers WHERE id = @Id;";
 
@@ -82,6 +87,8 @@ namespace copatroca.Repositories {
                     }
                 }
             }
+            ContactRepository _contactDB = new ContactRepository();
+            _contactDB.DeleteContact(user);
         }
     }
 }
