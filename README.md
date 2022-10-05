@@ -42,6 +42,12 @@ To run this program, download the source code to simulate collecting stickers.
 
 Your contributions and suggestions are heartily welcome.
 
+## Use case diagrams
+# Not-logged User
+<img src="source/usuario_deslogado.pdf" width="150">
+
+# Logged User
+<img src="source/usuario_logado.pdf" width="150">
 
 ## Trello Board
 - https://trello.com/b/IHrJVixr/cteds-copa
