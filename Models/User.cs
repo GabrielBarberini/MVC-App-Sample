@@ -10,32 +10,45 @@ namespace copatroca.Models {
         public string Name { get; set; } = string.Empty;
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
-        public Contact UserContact { get; set; }
+        public Contact UserContact; 
+        public Sticker UserSticker;
         
-        public User() { } 
+        public User() { 
+            UserContact = new Contact(this);
+        } 
 
-        public User(string info) {
-            this.UserContact = new Contact(info);
-        }
-
-        public User(int Id, string Name, string Email, string Password) {
+        public User(int Id, string Name, string Email, string Password, string Info) {
             this.Id = Id;
             this.Name = Name;
             this.Email = Email;
             this.Password = Password;
+            UserContact = new Contact(this);
+            UserContact.Info = Info;
         }
-
+        
         public void ToString() {
             Console.WriteLine($"Id = {Id}\nNome = {Name}\nEmail = {Email}");
         }
 
         public class Contact {
             public string Info { get; set; }
-            public int uid { get; set; }
+            public int Id { get; set; }
+            public int uId { get; set; }
 
-            public Contact(string Info) {
-                this.Info = Info;
+            public Contact(User user) {
+                uId = user.Id;
             }
+
+            public Contact(User user, string info, int id) {
+                Id = id;
+                uId = user.Id;
+                Info = info;
+            } 
+
         }
+
+        public class Sticker {
+            public string Code { get; set; }
+        } 
     }
 } 
