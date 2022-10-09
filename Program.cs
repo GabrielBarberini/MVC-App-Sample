@@ -43,15 +43,11 @@ namespace copatroca {
                         Console.Write("Senha: "); string password = Console.ReadLine();
                         Console.Write("Informacao de contato (Opcional): "); string info = Console.ReadLine();
 
-                        user = new User() {
-                            Name = name, 
-                            Email = email, 
-                            Password = password
-                        }; userView = (UserView) userController.Create(user); userView.show();
+                        userView = (UserView) userController.Create(newName: name, newEmail: email, newPassword: password); userView.show();
                         
                         if (!(String.IsNullOrEmpty(info))) { 
                             userView.Obj.UserContact.Info = info; 
-                            contactView = (ContactView) contactController.UpdateContactByUserId(userView.Obj.UserContact);
+                            contactView = (ContactView) contactController.UpdateContactByUserId(userView);
                             contactView.show();
                         } 
                         break;
@@ -63,10 +59,8 @@ namespace copatroca {
                             Console.Write("Email: "); registeredEmail = Console.ReadLine();
                         } 
 
-                        user = new User() {
-                            Email = registeredEmail
-                        }; userView = (UserView) userController.ReadUserByEmail(user);
-                        contactView = (ContactView) contactController.ReadContactByUserId(userView.Obj.UserContact);
+                        userView = (UserView) userController.ReadUserByEmail(registeredEmail);
+                        contactView = (ContactView) contactController.ReadContactByUserId(userView);
 
                         Console.WriteLine(userView.toString());
                         break;
@@ -78,14 +72,12 @@ namespace copatroca {
                             Console.Write("Email: "); loginEmail = Console.ReadLine();
                         } 
 
-                        user = new User() {
-                            Email = loginEmail
-                        }; userView = (UserView) userController.ReadUserByEmail(user);
+                        userView = (UserView) userController.ReadUserByEmail(loginEmail);
 
                         Console.WriteLine("Insira a senha...");
                         string loginPassword = Console.ReadLine();
                         if (!String.IsNullOrEmpty(loginPassword) && userView.Obj.Password == loginPassword) {
-                            run(userView.Obj);
+                            run(userView);
                         }
                         else
                             Console.WriteLine("\nCredenciais inválidas ou usuário não existente");
@@ -101,7 +93,7 @@ namespace copatroca {
             return(0);
         } 
 
-        static int run(User user) {
+        static int run(UserView uView) {
             string option;
             User.Contact userContact;
             ContactView contactView;
@@ -123,30 +115,28 @@ namespace copatroca {
                     case "0":
                         break;
                     case "1":
-                        Console.Write("Nome: "); string name = Console.ReadLine();
-                        Console.Write("Email: "); string email = Console.ReadLine();
-                        while (!Utils.isEmail(email)) {
+                        Console.Write("Nome: "); string newName = Console.ReadLine();
+                        Console.Write("Email: "); string newEmail = Console.ReadLine();
+                        while (!Utils.isEmail(newEmail)) {
                             Console.Write("\nEmail inválido, por favor insira um email no formato email@dominio.com\n"); 
-                            Console.Write("Email: "); email = Console.ReadLine();
+                            Console.Write("Email: "); newEmail = Console.ReadLine();
                         } 
-                        Console.Write("Senha: "); string password = Console.ReadLine();
+                        Console.Write("Senha: "); string newPassword = Console.ReadLine();
 
-                        user.Name = name; user.Email = email; user.Password = password;
-                        userView = (UserView) userController.Update(user);
+                        userView = (UserView) userController.Update(id: uView.Obj.Id, name: newName, email: newEmail, password: newPassword);
                         userView.show();
                         break;
 
                     case "2":
                         Console.Write("Info: "); string info = Console.ReadLine();
-                        user.UserContact.Info = info;
+                        uView.Obj.UserContact.Info = info;
 
-                        contactView = (ContactView) contactController.Update(user.UserContact);
+                        contactView = (ContactView) contactController.Update(uView);
                         contactView.show();
                         break;
 
                     case "3":
-                        userView = (UserView) userController.Delete(user); userView.show();
-                        contactView = (ContactView) contactController.Delete(user.UserContact); contactView.show();
+                        userView = (UserView) userController.Delete(uView); userView.show();
                         option = "0";
                         break;
 

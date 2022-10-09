@@ -14,28 +14,44 @@ namespace copatroca.Controllers {
             cDB = new ContactRepository();
         } 
 
-        public IView<User.Contact> Create(User.Contact contact) {
-            ContactView view = new ContactView(contact);
+        public IView<User.Contact> Create(User.Contact userContact) {
+            User user = new User(){
+                UserContact = userContact
+            }; 
+            UserView uView = new UserView(user);
+            return Create(uView);
+        }
 
-            cDB.Create(contact);
+        public IView<User.Contact> Update(User.Contact userContact) {
+            User user = new User(){
+                UserContact = userContact
+            }; 
+            UserView uView = new UserView(user);
+            return Update(uView);
+        }
+
+        public IView<User.Contact> Create(UserView uView) {
+            ContactView view = new ContactView(uView.Obj.UserContact);
+
+            cDB.Create(uView.Obj.UserContact);
             view.Control = true;
             view.Info = $"Contato criado com sucesso!";
             return view;
         } 
 
-        public IView<User.Contact> Update(User.Contact contact) {
-            ContactView view = new ContactView(contact);
+        public IView<User.Contact> Update(UserView uView) {
+            ContactView view = new ContactView(uView.Obj.UserContact);
 
-            cDB.Update(contact);
+            cDB.Update(uView.Obj.UserContact);
             view.Control = true;
             view.Info = $"Contato atualizado com sucesso!";
             return view;
         } 
 
-        public IView<User.Contact> UpdateContactByUserId(User.Contact contact) {
-            ContactView view = new ContactView(contact);
+        public IView<User.Contact> UpdateContactByUserId(UserView uView) {
+            ContactView view = new ContactView(uView.Obj.UserContact);
 
-            cDB.UpdateContactByUserId(contact);
+            cDB.UpdateContactByUserId(uView.Obj.UserContact);
             view.Control = true;
             view.Info = $"Contato atualizado com sucesso!";
             return view;
@@ -58,8 +74,8 @@ namespace copatroca.Controllers {
             return view;
         } 
 
-        public IView<User.Contact> ReadContactByUserId(User.Contact contact) {
-            ContactView view = new ContactView(cDB.ReadContactByUserId(contact));
+        public IView<User.Contact> ReadContactByUserId(UserView uView) {
+            ContactView view = new ContactView(cDB.ReadContactByUserId(uView.Obj.UserContact));
 
             view.Control = true;
             view.Info = $"Contato encontrado!";
