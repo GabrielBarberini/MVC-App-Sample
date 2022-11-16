@@ -11,7 +11,7 @@ namespace copatroca.Models {
         public string Email { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public Contact UserContact; 
-        public Sticker UserSticker;
+        public Sticker sticker = new Sticker();
         
         public User() { 
             UserContact = new Contact(this);
@@ -44,11 +44,6 @@ namespace copatroca.Models {
                 uId = user.Id;
                 Info = info;
             } 
-
         }
-
-        public class Sticker {
-            public string Code { get; set; }
-        } 
     }
 } 
