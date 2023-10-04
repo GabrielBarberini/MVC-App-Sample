@@ -15,12 +15,6 @@ Built with .NET.
 
 ---
 
-## Installation
-
-To run this program, download the source code to simulate collecting stickers. 
-
----
-
 ## Prototype for mobile application
 
 ### Screen 1 - MENU
@@ -34,17 +28,6 @@ To run this program, download the source code to simulate collecting stickers.
 ### Screen 3 - INPUT MENU
 
 <img src="source/screen3.png" width="150">
-
-
----
-
-## Contribution
-
-Your contributions and suggestions are heartily welcome.
-
-## Use case diagrams
-### Not-logged User
-<img src="source/usuario_deslogado.png">
 
 ### Logged User
 <img src="source/usuario_logado.png">
