@@ -31,6 +31,3 @@ Built with .NET.
 
 ### Logged User
 <img src="source/usuario_logado.png">
-
-## Trello Board
-- https://trello.com/b/IHrJVixr/cteds-copa
